@@ -4,6 +4,8 @@ node_modules
 coverage
 /public
 /app/favicon.ico
+/components/button/arrow.svg
+/components/like/like.svg
 .prettierignore
 .stylelintignore
 .eslintignore
