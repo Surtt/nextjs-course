@@ -1,0 +1,25 @@
+.card {
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+  max-width: 350px;
+
+  padding: 10px;
+
+  border: 1px solid var(--c-border);
+  border-radius: 5px;
+  row-gap: 16px;
+}
+
+.top,
+.bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.middle {
+  display: flex;
+  flex-direction: column;
+  row-gap: 6px;
+}

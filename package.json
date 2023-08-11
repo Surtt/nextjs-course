@@ -1,0 +1,40 @@
+{
+  "name": "nextjs-course",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "prettier --check . && stylelint --allow-empty-input \"**/*.{css,scss}\" && next build",
+    "start": "next start",
+    "lint": "prettier --check . && stylelint --allow-empty-input \"**/*.{css,scss}\" && next lint",
+    "format": "prettier --write .",
+    "stylelint": "stylelint \"**/*.css\" --fix",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@types/node": "20.4.4",
+    "@types/react": "18.2.15",
+    "@types/react-dom": "18.2.7",
+    "classnames": "^2.3.2",
+    "eslint-config-next": "13.4.12",
+    "next": "13.4.12",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^8.0.1",
+    "@typescript-eslint/eslint-plugin": "^6.2.0",
+    "@typescript-eslint/parser": "^6.2.0",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.8.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
+    "prettier": "^3.0.0",
+    "stylelint": "^15.10.2",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-standard": "^34.0.0",
+    "stylelint-order": "^6.0.3",
+    "stylelint-order-config-standard": "^0.1.3"
+  }
+}
