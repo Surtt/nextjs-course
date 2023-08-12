@@ -38,10 +38,4 @@
 
 .border:hover {
   cursor: pointer;
-
-  background-color: var(--c-black-20);
-}
-
-.border:hover .likeIcon {
-  stroke: var(--c-white);
 }

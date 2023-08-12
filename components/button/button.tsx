@@ -12,15 +12,15 @@ export const Button = ({
 }: ButtonProps) => {
   return (
     <button
+      {...props}
       className={cn(styles.button, className, {
         [styles.text]: variant === 'text',
         [styles.contained]: variant === 'contained',
       })}
-      {...props}
     >
-      {iconPosition !== 'none' && iconPosition === 'left' && icon}
+      {iconPosition === 'left' && icon}
       {children}
-      {iconPosition !== 'none' && iconPosition === 'right' && icon}
+      {iconPosition === 'right' && icon}
     </button>
   );
 };

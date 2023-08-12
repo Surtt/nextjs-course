@@ -4,7 +4,7 @@ import styles from './header.module.css';
 export const Header = ({ children }: HeaderProps) => {
   return (
     <header className={styles.header}>
-      <p className={styles.logo}>.my_blog</p>
+      <span className={styles.logo}>.my_blog</span>
       {children}
     </header>
   );
