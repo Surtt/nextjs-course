@@ -1,5 +1,7 @@
 .button {
   display: flex;
+  column-gap: 10px;
+
   align-items: center;
 
   box-sizing: border-box;
@@ -48,10 +50,4 @@
 
 .contained:hover {
   background-color: var(--c-black-hover);
-}
-
-.arrow {
-  display: flex;
-
-  margin-left: 10px;
 }

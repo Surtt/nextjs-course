@@ -1,32 +1,37 @@
-import Image from 'next/image';
 import cn from 'classnames';
 
 import { CardProps } from '@/components/card/card.props';
-import { Button, Like, Title, Typography } from '@/components';
+import { Button, Title, Typography } from '@/components';
 
 import styles from './card.module.css';
+import Like from '@/components/like/like';
+import ArrowIcon from '@/public/icons/arrow.svg';
+import Image from 'next/image';
 
-export const Card = ({}: CardProps) => {
+export const Card = ({ title, body }: CardProps) => {
   return (
-    <div className={cn(styles.card)}>
-      <img src='https://placehold.co/330x200' alt='placeholder' />
-      <div className={cn(styles.top)}>
+    <article className={styles.card}>
+      <Image
+        width={330}
+        height={200}
+        className={styles.img}
+        src='https://fakeimg.pl/330x200'
+        alt='placeholder'
+      />
+      <div className={styles.top}>
         <Typography>Front-end · 1 месяц назад</Typography>
-        <Like>4</Like>
+        <Like number='4' />
       </div>
-      <div className={cn(styles.middle)}>
-        <Title tag='h3'>Как работать с CSS Grid</Title>
-        <Typography size='sm'>
-          Грид-раскладка (CSS Grid Layout) представляет собой двумерную систему
-          сеток в CSS. Гриды подойдут и для верстки основных областей страницы..
-        </Typography>
+      <div className={styles.middle}>
+        <Title tag='h3'>{title}</Title>
+        <Typography size='sm'>{body}</Typography>
       </div>
-      <div className={cn(styles.bottom)}>
+      <div className={styles.bottom}>
         <Typography size='xs'>3 минуты</Typography>
-        <Button variant='text' arrow='right'>
+        <Button variant='text' icon={<ArrowIcon />} iconPosition='right'>
           Читать
         </Button>
       </div>
-    </div>
+    </article>
   );
 };

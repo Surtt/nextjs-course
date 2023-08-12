@@ -7,6 +7,16 @@ const nextConfig = {
     });
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'fakeimg.pl',
+        port: '',
+        pathname: '/330x200',
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;

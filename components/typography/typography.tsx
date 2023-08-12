@@ -12,13 +12,13 @@ export const Typography = ({
 }: TypographyProps) => {
   return (
     <p
+      {...props}
       className={cn(styles.p, className, {
         [styles.xs]: size === 'xs',
         [styles.sm]: size === 'sm',
         [styles.md]: size === 'md',
         [styles.lg]: size === 'lg',
       })}
-      {...props}
     >
       {children}
     </p>
