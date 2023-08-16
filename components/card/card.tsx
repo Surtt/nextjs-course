@@ -7,8 +7,9 @@ import styles from './card.module.css';
 import Like from '@/components/like/like';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import Image from 'next/image';
+import Link from 'next/link';
 
-export const Card = ({ title, body }: CardProps) => {
+export const Card = ({ id, title, body }: CardProps) => {
   return (
     <article className={styles.card}>
       <Image
@@ -28,9 +29,11 @@ export const Card = ({ title, body }: CardProps) => {
       </div>
       <div className={styles.bottom}>
         <Typography size='xs'>3 минуты</Typography>
-        <Button variant='text' icon={<ArrowIcon />} iconPosition='right'>
-          Читать
-        </Button>
+        <Link href={`/posts/${id}`}>
+          <Button variant='text' icon={<ArrowIcon />} iconPosition='right'>
+            Читать
+          </Button>
+        </Link>
       </div>
     </article>
   );

@@ -2,9 +2,8 @@ import 'modern-normalize';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
-import { Header } from '@/components';
-import Image from 'next/image';
-import GitHubIcon from '@/public/icons/github.svg';
+import { Github, Header } from '@/components';
+import { IconContextProvider } from '@/context/icon.context';
 
 const openSans = Open_Sans({
   weight: ['300', '400', '700'],
@@ -25,10 +24,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='ru'>
       <body className={openSans.className}>
-        <Header>
-          <GitHubIcon width={19} height={20} />
-        </Header>
-        {children}
+        <IconContextProvider>
+          <Header>
+            <Github />
+          </Header>
+          {children}
+        </IconContextProvider>
       </body>
     </html>
   );
