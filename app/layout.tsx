@@ -24,7 +24,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='ru'>
-      <body className={openSans.className}>
+      <body className={openSans.variable}>
         <Header>
           <Image src={gitHubIcon} width={19} height={20} alt='github' />
         </Header>
