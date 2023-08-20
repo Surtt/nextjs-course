@@ -7,7 +7,7 @@ import { Typography } from '@/components';
 import LikeIcon from './like.svg';
 
 import styles from './like.module.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const Like = ({ number = '', border = false, size = 'sm' }: LikeProps) => {
   const [isLike, setIsLike] = useState(false);

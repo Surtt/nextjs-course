@@ -1,15 +1,12 @@
 /* eslint-env node */
 const path = require('path');
 
-const eslintCommand = (filenames) =>
-  `next lint --file ${filenames
-    .map((f) => path.relative(process.cwd(), f))
-    .join(' --file ')}`;
+const eslintCommand = 'npm run lint';
 
 const formatCommand = 'prettier --write';
 const stylelintCommand = 'stylelint --allow-empty-input "**/*.{css,scss}"';
 module.exports = {
-  '*.{js,jsx,ts,tsx}': [formatCommand],
+  '*.{js,jsx,ts,tsx}': [eslintCommand, formatCommand],
   '*.{css,scss}': [formatCommand, stylelintCommand],
   '!*.{js,jsx,ts,tsx,css,scss}': [formatCommand],
 };

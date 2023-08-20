@@ -12,7 +12,7 @@ async function getPosts(): Promise<PostInterface[]> {
 }
 
 export default async function Home() {
-  // const posts = await getPosts();
+  const posts = await getPosts();
   return (
     <main className={styles.main}>
       <Card />
@@ -20,7 +20,7 @@ export default async function Home() {
       <Card />
       <Card />
       <Like border={true} size='md' />
-      {/* <div>{JSON.stringify(posts)}</div> */}
+      <div>{JSON.stringify(posts)}</div>
     </main>
   );
 }
