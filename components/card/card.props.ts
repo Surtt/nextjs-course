@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 export interface CardProps {
-  id: string;
+  id: number;
   title: string;
   body: string;
 }

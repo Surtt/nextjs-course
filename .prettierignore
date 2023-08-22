@@ -2,10 +2,8 @@ node_modules
 .next
 .husky
 coverage
-/public
 /app/favicon.ico
-/public/icons/arrow.svg
-/components/like/like.svg
+/public/icons/
 .prettierignore
 .stylelintignore
 .eslintignore

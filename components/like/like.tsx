@@ -9,22 +9,25 @@ import LikeIcon from './like.svg';
 import styles from './like.module.css';
 import { useEffect, useState } from 'react';
 
-const Like = ({ number = '', border = false, size = 'sm' }: LikeProps) => {
+const Like = ({ amount, border = false, size = 'sm' }: LikeProps) => {
   const [isLike, setIsLike] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [err, setErr] = useState('');
+
+  const setLike = async () => {
+    const res = await fetch('https://jsonplaceholder.typicode.com/posts/4');
+
+    if (!res.ok) {
+      throw new Error(`Error! status: ${res.status}`);
+    }
+    return res.json();
+  };
 
   const handleLike = async () => {
     setIsLoading(true);
 
     try {
-      const res = await fetch('https://jsonplaceholder.typicode.com/posts/4');
-
-      if (!res.ok) {
-        throw new Error(`Error! status: ${res.status}`);
-      }
-      const data = await res.json();
-      console.log(data);
+      await setLike();
       setIsLike((like) => !like);
     } catch (e) {
       if (e instanceof Error) {
@@ -48,7 +51,7 @@ const Like = ({ number = '', border = false, size = 'sm' }: LikeProps) => {
           })}
         >
           {err && <h2>{err}</h2>}
-          {number && <Typography size='xs'>{number}</Typography>}
+          {amount && <Typography size='xs'>{amount}</Typography>}
           <LikeIcon
             className={cn(styles.likeIcon, {
               [styles.sm]: size === 'sm',

@@ -1,13 +1,14 @@
 import cn from 'classnames';
 
 import { CardProps } from '@/components/card/card.props';
-import { Button, Title, Typography } from '@/components';
+import { ButtonOrLink, Title, Typography } from '@/components';
 
 import styles from './card.module.css';
 import Like from '@/components/like/like';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import Image from 'next/image';
 import Link from 'next/link';
+import { routes } from '@/constants/routes';
 
 export const Card = ({ id, title, body }: CardProps) => {
   return (
@@ -21,7 +22,7 @@ export const Card = ({ id, title, body }: CardProps) => {
       />
       <div className={styles.top}>
         <Typography>Front-end · 1 месяц назад</Typography>
-        <Like number='4' />
+        <Like amount={4} />
       </div>
       <div className={styles.middle}>
         <Title tag='h3'>{title}</Title>
@@ -29,11 +30,15 @@ export const Card = ({ id, title, body }: CardProps) => {
       </div>
       <div className={styles.bottom}>
         <Typography size='xs'>3 минуты</Typography>
-        <Link href={`/posts/${id}`}>
-          <Button variant='text' icon={<ArrowIcon />} iconPosition='right'>
-            Читать
-          </Button>
-        </Link>
+
+        <ButtonOrLink
+          href={routes.post(id)}
+          variant='text'
+          icon={<ArrowIcon />}
+          iconPosition='right'
+        >
+          Читать
+        </ButtonOrLink>
       </div>
     </article>
   );
