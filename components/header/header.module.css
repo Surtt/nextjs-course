@@ -1,15 +1,13 @@
 .header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-
+  align-items: center;
   padding: 15px 45px;
 }
 
 .logo {
   color: var(--c-black);
-
-  font-size: 40px;
   font-weight: 300;
+  font-size: 40px;
   line-height: 55px;
 }

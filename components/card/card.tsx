@@ -1,6 +1,3 @@
-import cn from 'classnames';
-
-import { CardProps } from '@/components/card/card.props';
 import { Button, Title, Typography } from '@/components';
 
 import styles from './card.module.css';
