@@ -1,6 +1,39 @@
 .like {
   display: flex;
-  column-gap: 2px;
-
+  justify-content: center;
   align-items: center;
+  column-gap: 2px;
+}
+
+.likeIcon {
+  stroke: var(--c-black-20);
+}
+
+.sm {
+  width: 16px;
+  height: 16px;
+}
+
+.md {
+  width: 20px;
+  height: 20px;
+}
+
+.fill {
+  background-color: var(--c-black-20);
+}
+
+.fill .likeIcon {
+  stroke: var(--c-white);
+}
+
+.border {
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--c-black-20);
+  border-radius: 40px;
+}
+
+.border:hover {
+  cursor: pointer;
 }

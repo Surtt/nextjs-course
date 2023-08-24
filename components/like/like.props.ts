@@ -1,5 +1,6 @@
-import { ReactNode } from 'react';
-
 export interface LikeProps {
-  children: ReactNode;
+  number?: string;
+  border?: boolean;
+  size?: 'sm' | 'md';
+  onClick?: () => void;
 }
