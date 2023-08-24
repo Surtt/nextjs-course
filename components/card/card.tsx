@@ -1,5 +1,3 @@
-import cn from 'classnames';
-
 import { CardProps } from '@/components/card/card.props';
 import { ButtonOrLink, Title, Typography } from '@/components';
 
@@ -7,7 +5,6 @@ import styles from './card.module.css';
 import Like from '@/components/like/like';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import Image from 'next/image';
-import Link from 'next/link';
 import { routes } from '@/constants/routes';
 
 export const Card = ({ id, title, body }: CardProps) => {

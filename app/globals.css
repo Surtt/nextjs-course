@@ -1,5 +1,3 @@
-@import url('modern-normalize');
-
 :root {
   /* colors */
   --black: #000;
@@ -27,10 +25,7 @@
 html,
 body {
   width: 100vw;
-
-  color: var(--c-black-20);
-
   background-color: var(--c-white);
-
-  font-family: Open-sans, sans-serif;
+  color: var(--c-black-20);
+  font-family: var(--font-open-sans);
 }
