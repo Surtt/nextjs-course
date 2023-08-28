@@ -1,8 +1,3 @@
-import { urlSearchPostsParams } from '@/app/api';
-
-export const getUrlWithParams = (
-  url: string,
-  params: typeof urlSearchPostsParams,
-) => {
+export const getUrlWithParams = (url: string, params: URLSearchParams) => {
   return `${url}?${params}`;
 };

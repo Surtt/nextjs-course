@@ -1,3 +1,6 @@
+@import url('modern-normalize');
+@import url('./preflight.css');
+
 :root {
   /* colors */
   --black: #000;
@@ -13,13 +16,6 @@
   /* breakpoints */
   --desktop: 1206px;
   --tablet: 768px;
-}
-
-*,
-::before,
-::after {
-  margin: 0;
-  padding: 0;
 }
 
 html,

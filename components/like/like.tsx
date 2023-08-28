@@ -9,19 +9,25 @@ import LikeIcon from './like.svg';
 import styles from './like.module.css';
 import { useState } from 'react';
 
-const Like = ({ amount, border = false, size = 'sm' }: LikeProps) => {
+const setLike = async () => {
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts/4');
+
+  if (!res.ok) {
+    throw new Error(`Error! status: ${res.status}`);
+  }
+  return res.json();
+};
+
+const Like = ({
+  amount,
+  border = false,
+  size = 'sm',
+  className,
+  ...props
+}: LikeProps) => {
   const [isLike, setIsLike] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [err, setErr] = useState('');
-
-  const setLike = async () => {
-    const res = await fetch('https://jsonplaceholder.typicode.com/posts/4');
-
-    if (!res.ok) {
-      throw new Error(`Error! status: ${res.status}`);
-    }
-    return res.json();
-  };
 
   const handleLike = async () => {
     setIsLoading(true);
@@ -43,9 +49,10 @@ const Like = ({ amount, border = false, size = 'sm' }: LikeProps) => {
       {isLoading ? (
         <h2>Loading...</h2>
       ) : (
-        <div
+        <button
+          {...props}
           onClick={handleLike}
-          className={cn(styles.like, {
+          className={cn(styles.like, className, {
             [styles.border]: border,
             [styles.fill]: isLike,
           })}
@@ -58,7 +65,7 @@ const Like = ({ amount, border = false, size = 'sm' }: LikeProps) => {
               [styles.md]: size === 'md',
             })}
           />
-        </div>
+        </button>
       )}
     </>
   );

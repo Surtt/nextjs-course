@@ -1,4 +1,3 @@
-import { CardProps } from '@/components/card/card.props';
 import { ButtonOrLink, Title, Typography } from '@/components';
 
 import styles from './card.module.css';
@@ -6,8 +5,9 @@ import Like from '@/components/like/like';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import Image from 'next/image';
 import { routes } from '@/constants/routes';
+import { Post } from '@/interfaces/post.interface';
 
-export const Card = ({ id, title, body }: CardProps) => {
+export const Card = ({ id, title, body }: Post) => {
   return (
     <article className={styles.card}>
       <Image
