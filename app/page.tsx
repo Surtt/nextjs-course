@@ -1,5 +1,4 @@
 import { Card } from '@/components';
-import Like from '@/components/like/like';
 import styles from './page.module.css';
 import { Post } from '@/interfaces/post.interface';
 import { API, urlSearchPostsParams } from '@/app/api';
@@ -19,7 +18,6 @@ export default async function Home() {
       {posts.map((post) => (
         <Card key={post.id} {...post} />
       ))}
-      <Like border={true} size='md' />
     </main>
   );
 }

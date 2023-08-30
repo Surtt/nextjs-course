@@ -8,17 +8,10 @@ import LikeIcon from './like.svg';
 
 import styles from './like.module.css';
 import { useState } from 'react';
-
-const setLike = async () => {
-  const res = await fetch('https://jsonplaceholder.typicode.com/posts/4');
-
-  if (!res.ok) {
-    throw new Error(`Error! status: ${res.status}`);
-  }
-  return res.json();
-};
+import { setLike } from '@/app/api';
 
 const Like = ({
+  postId,
   amount,
   border = false,
   size = 'sm',
@@ -33,7 +26,7 @@ const Like = ({
     setIsLoading(true);
 
     try {
-      await setLike();
+      await setLike(postId);
       setIsLike((like) => !like);
     } catch (e) {
       if (e instanceof Error) {

@@ -19,7 +19,7 @@ export const Card = ({ id, title, body }: Post) => {
       />
       <div className={styles.top}>
         <Typography>Front-end · 1 месяц назад</Typography>
-        <Like amount={4} />
+        <Like amount={4} postId={id} />
       </div>
       <div className={styles.middle}>
         <Title tag='h3'>{title}</Title>

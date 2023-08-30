@@ -5,6 +5,7 @@ export interface LikeProps
     ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   > {
+  postId: number;
   amount?: number;
   border?: boolean;
   size?: 'sm' | 'md';
