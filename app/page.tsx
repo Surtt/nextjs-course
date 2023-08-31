@@ -1,26 +1,23 @@
 import { Card } from '@/components';
-import Like from '@/components/like/like';
 import styles from './page.module.css';
-import { PostInterface } from '@/interfaces/post.interface';
-import { API } from '@/app/api';
+import { Post } from '@/interfaces/post.interface';
+import { API, urlSearchPostsParams } from '@/app/api';
+import { getUrlWithParams } from '@/helpers/getUrlWithParams';
 
-async function getPosts(): Promise<PostInterface[]> {
-  const res = await fetch(API.posts);
-  const data = await res.json();
-  console.log(data);
-  return data;
+async function getPosts(): Promise<Post[]> {
+  const res = await fetch(
+    getUrlWithParams(API.posts, urlSearchPostsParams(0, 10)),
+  );
+  return await res.json();
 }
 
 export default async function Home() {
   const posts = await getPosts();
   return (
     <main className={styles.main}>
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Like border={true} size='md' />
-      <div>{JSON.stringify(posts)}</div>
+      {posts.map((post) => (
+        <Card key={post.id} {...post} />
+      ))}
     </main>
   );
 }
