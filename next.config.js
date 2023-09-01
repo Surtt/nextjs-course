@@ -37,13 +37,6 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'fakeimg.pl',
         port: '',
-        pathname: '/330x200',
-      },
-      {
-        protocol: 'https',
-        hostname: 'fakeimg.pl',
-        port: '',
-        pathname: '/657x400',
       },
     ],
   },
