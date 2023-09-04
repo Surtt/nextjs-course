@@ -8,3 +8,4 @@ export * from './github/github';
 export * from './input/input';
 export * from './textarea/textarea';
 export * from './comment/comment';
+export * from './form/form';

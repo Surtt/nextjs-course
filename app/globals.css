@@ -3,7 +3,7 @@
 
 :root {
   /* colors */
-  --black: #000;
+  --black: #312c2c;
   --c-black: #2c2c2c;
   --c-black-hover: #030303;
   --c-black-20: #6e6e6e;
@@ -13,6 +13,7 @@
   --c-white: #fff;
   --c-border: #f5f5f5;
   --gray: rgb(78 93 124 / 50%);
+  --red: #e82020;
 
   /* breakpoints */
   --desktop: 1206px;
