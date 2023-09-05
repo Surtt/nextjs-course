@@ -6,6 +6,7 @@ export const urlSearchPostsParams = (start: number, limit: number) =>
 
 export const API = {
   posts: `${process.env.NEXT_PUBLIC_DOMAIN}/posts`,
+  comments: `${process.env.NEXT_PUBLIC_DOMAIN}/comments`,
 };
 
 export const setLike = async (postId: number) => {
