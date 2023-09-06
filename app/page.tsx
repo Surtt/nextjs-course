@@ -14,7 +14,7 @@ async function getPosts(): Promise<Post[]> {
 export default async function Home() {
   const posts = await getPosts();
   return (
-    <main className={styles.main}>
+    <main className={styles.main} role='main'>
       {posts.map((post) => (
         <Card key={post.id} {...post} />
       ))}

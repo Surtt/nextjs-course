@@ -15,6 +15,7 @@ export const Form = ({ postId, className, ...props }: FormProps) => {
     handleSubmit,
     formState: { errors },
     reset,
+    clearErrors,
   } = useForm<IForm>();
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [error, setError] = useState<string>();
@@ -58,6 +59,7 @@ export const Form = ({ postId, className, ...props }: FormProps) => {
         })}
         placeholder='Name'
         error={errors.name}
+        aria-invalid={errors.name ? true : false}
       />
       <Textarea
         {...register('comment', {
@@ -65,23 +67,35 @@ export const Form = ({ postId, className, ...props }: FormProps) => {
         })}
         placeholder='Comment'
         error={errors.comment}
+        aria-label='Comment'
+        aria-invalid={errors.comment ? true : false}
       />
-      <ButtonOrLink variant='contained'>Send</ButtonOrLink>
+      <ButtonOrLink variant='contained' onClick={() => clearErrors()}>
+        Send
+      </ButtonOrLink>
       {isSuccess && (
-        <div className={cn(styles.panel, styles.success)}>
+        <div role='alert' className={cn(styles.panel, styles.success)}>
           <div className={styles.successTitle}>Your feedback has been sent</div>
           <div>Your review will be published after verification</div>
-          <div onClick={() => setIsSuccess(false)} className={styles.closeIcon}>
+          <button
+            aria-label='Close success notification'
+            onClick={() => setIsSuccess(false)}
+            className={styles.closeIcon}
+          >
             &#9587;
-          </div>
+          </button>
         </div>
       )}
       {error && (
-        <div className={cn(styles.panel, styles.error)}>
+        <div className={cn(styles.panel, styles.error)} role='alert'>
           {error}
-          <div onClick={() => setError(undefined)} className={styles.closeIcon}>
+          <button
+            aria-label='Close error notification'
+            onClick={() => setError(undefined)}
+            className={styles.closeIcon}
+          >
             &#9587;
-          </div>
+          </button>
         </div>
       )}
     </form>
