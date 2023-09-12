@@ -12,8 +12,8 @@ export const Input = forwardRef(
     return (
       <div className={cn(styles.inputWrapper, className)}>
         <input
-          ref={ref}
           {...props}
+          ref={ref}
           className={cn(styles.input, {
             [styles.error]: error,
           })}

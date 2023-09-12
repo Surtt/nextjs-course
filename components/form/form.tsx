@@ -1,23 +1,28 @@
 'use client';
 
-import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import React from 'react';
 import { IForm } from '@/interfaces/form.interface';
 import { FormProps } from '@/components/form/form.props';
 import styles from './form.module.css';
 import { ButtonOrLink, Input, Textarea } from '@/components';
-import { API } from '@/app/api';
 import cn from 'classnames';
+import { API } from '@/app/api';
 
 export const Form = ({ postId, className, ...props }: FormProps) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    setError,
+    formState: { errors, isSubmitSuccessful },
     reset,
-  } = useForm<IForm>();
-  const [isSuccess, setIsSuccess] = useState<boolean>(false);
-  const [error, setError] = useState<string>();
+    clearErrors,
+  } = useForm<IForm>({
+    defaultValues: {
+      name: '',
+      comment: '',
+    },
+  });
 
   const onSubmit = async (data: IForm) => {
     try {
@@ -33,15 +38,20 @@ export const Form = ({ postId, className, ...props }: FormProps) => {
       });
 
       if (res.ok) {
-        setIsSuccess(true);
         reset();
         return res.json();
       } else {
-        setError('Something went wrong');
+        setError('customError', {
+          type: 'server side error',
+          message: 'Something went wrong',
+        });
       }
     } catch (e) {
       if (e instanceof Error) {
-        setError(e.message);
+        setError('customError', {
+          type: 'server side error',
+          message: 'Something went wrong',
+        });
       }
     }
   };
@@ -58,6 +68,8 @@ export const Form = ({ postId, className, ...props }: FormProps) => {
         })}
         placeholder='Name'
         error={errors.name}
+        aria-invalid={errors.name ? true : false}
+        autoComplete='name'
       />
       <Textarea
         {...register('comment', {
@@ -66,22 +78,32 @@ export const Form = ({ postId, className, ...props }: FormProps) => {
         placeholder='Comment'
         error={errors.comment}
       />
-      <ButtonOrLink variant='contained'>Send</ButtonOrLink>
-      {isSuccess && (
-        <div className={cn(styles.panel, styles.success)}>
-          <div className={styles.successTitle}>Your feedback has been sent</div>
-          <div>Your review will be published after verification</div>
-          <div onClick={() => setIsSuccess(false)} className={styles.closeIcon}>
+      <ButtonOrLink variant='contained' onClick={() => clearErrors()}>
+        Send
+      </ButtonOrLink>
+      {isSubmitSuccessful && (
+        <div role='alert' className={cn(styles.panel, styles.success)}>
+          <p className={styles.successTitle}>Your feedback has been sent</p>
+          <p>Your review will be published after verification</p>
+          <button
+            aria-label='Close success notification'
+            onClick={() => reset()}
+            className={styles.closeIcon}
+          >
             &#9587;
-          </div>
+          </button>
         </div>
       )}
-      {error && (
-        <div className={cn(styles.panel, styles.error)}>
-          {error}
-          <div onClick={() => setError(undefined)} className={styles.closeIcon}>
+      {errors.customError && (
+        <div className={cn(styles.panel, styles.error)} role='alert'>
+          {errors.customError?.message}
+          <button
+            aria-label='Close error notification'
+            onClick={() => clearErrors()}
+            className={styles.closeIcon}
+          >
             &#9587;
-          </div>
+          </button>
         </div>
       )}
     </form>

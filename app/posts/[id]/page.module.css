@@ -11,8 +11,15 @@
   margin-bottom: 12px;
 }
 
-.img {
+.imgWrapper {
+  position: relative;
+  width: 657px;
+  height: 400px;
   margin-bottom: 20px;
+}
+
+.img {
+  object-fit: contain;
 }
 
 .text {

@@ -1,11 +1,10 @@
 import { API } from '@/app/api';
 import { Post as PostInterface } from '@/interfaces/post.interface';
-import { Form, Title, Typography } from '@/components';
+import { Comment, Form, Title, Typography } from '@/components';
 import styles from './page.module.css';
 import Like from '@/components/like/like';
 import Image from 'next/image';
 import { Comment as CommentInterface } from '@/interfaces/comment.interface';
-import { Comment } from '@/components';
 
 interface PostProps {
   params: {
@@ -19,7 +18,6 @@ async function getPost(id: string): Promise<PostInterface> {
 }
 
 async function getCommentsByPost(postId: string): Promise<CommentInterface[]> {
-  // const res = await fetch(`${API.comments}?postId=${postId}`);
   const res = await fetch(`${API.posts}/${postId}/comments`);
   return await res.json();
 }
@@ -40,13 +38,15 @@ export default async function Post({ params }: PostProps) {
         <span>&bull;</span>
         <Like amount={4} postId={post.id} />
       </div>
-      <Image
-        width={657}
-        height={400}
-        className={styles.img}
-        src='https://fakeimg.pl/657x400'
-        alt='placeholder'
-      />
+      <div className={styles.imgWrapper}>
+        <Image
+          className={styles.img}
+          src='https://fakeimg.pl/657x400'
+          alt='placeholder'
+          sizes='500px'
+          fill
+        />
+      </div>
       <Typography className={styles.text} size='lg'>
         {post.body}
       </Typography>
