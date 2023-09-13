@@ -1,11 +1,10 @@
 import { API } from '@/app/api';
 import { Post as PostInterface } from '@/interfaces/post.interface';
-import { Form, Title, Typography } from '@/components';
+import { Comment, Form, Title, Typography } from '@/components';
 import styles from './page.module.css';
 import Like from '@/components/like/like';
 import Image from 'next/image';
 import { Comment as CommentInterface } from '@/interfaces/comment.interface';
-import { Comment } from '@/components';
 
 interface PostProps {
   params: {
@@ -19,14 +18,15 @@ async function getPost(id: string): Promise<PostInterface> {
 }
 
 async function getCommentsByPost(postId: string): Promise<CommentInterface[]> {
-  // const res = await fetch(`${API.comments}?postId=${postId}`);
   const res = await fetch(`${API.posts}/${postId}/comments`);
   return await res.json();
 }
 
 export default async function Post({ params }: PostProps) {
-  const post = await getPost(params.id);
-  const comments = await getCommentsByPost(params.id);
+  const [post, comments] = await Promise.all([
+    getPost(params.id),
+    getCommentsByPost(params.id),
+  ]);
 
   return (
     <article className={styles.article}>

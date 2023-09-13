@@ -75,8 +75,8 @@ export const Form = ({ postId, className, ...props }: FormProps) => {
       </ButtonOrLink>
       {isSuccess && (
         <div role='alert' className={cn(styles.panel, styles.success)}>
-          <div className={styles.successTitle}>Your feedback has been sent</div>
-          <div>Your review will be published after verification</div>
+          <p className={styles.successTitle}>Your feedback has been sent</p>
+          <p>Your review will be published after verification</p>
           <button
             aria-label='Close success notification'
             onClick={() => setIsSuccess(false)}
