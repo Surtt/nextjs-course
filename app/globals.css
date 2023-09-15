@@ -3,7 +3,7 @@
 
 :root {
   /* colors */
-  --black: #000;
+  --black: #312c2c;
   --c-black: #2c2c2c;
   --c-black-hover: #030303;
   --c-black-20: #6e6e6e;
@@ -12,6 +12,11 @@
   --c-primary-hover: #5aa3ff;
   --c-white: #fff;
   --c-border: #f5f5f5;
+  --gray: rgb(78 93 124 / 50%);
+  --red: #ff4141;
+  --red-light: #ff9393;
+  --green: #b7e5a2;
+  --light-green: #93ffa6;
 
   /* breakpoints */
   --desktop: 1206px;
@@ -21,6 +26,8 @@
 html,
 body {
   width: 100vw;
+  max-width: var(--desktop);
+  margin: auto;
   background-color: var(--c-white);
   color: var(--c-black-20);
   font-family: var(--font-open-sans);
