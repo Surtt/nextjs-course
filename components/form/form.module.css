@@ -12,13 +12,13 @@
 }
 
 .success {
-  border: 1px solid #b7e5a2;
-  background-color: #93ffa6;
+  border: 1px solid var(--green);
+  background-color: var(--light-green);
 }
 
 .error {
-  border: 1px solid #ff4141;
-  background-color: #ff9393;
+  border: 1px solid var(--red);
+  background-color: var(--red-light);
 }
 
 .successTitle {

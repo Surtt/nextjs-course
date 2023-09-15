@@ -40,13 +40,15 @@ export default async function Post({ params }: PostProps) {
         <span>&bull;</span>
         <Like amount={4} postId={post.id} />
       </div>
-      <Image
-        width={657}
-        height={400}
-        className={styles.img}
-        src='https://fakeimg.pl/657x400'
-        alt='placeholder'
-      />
+      <div className={styles.imgWrapper}>
+        <Image
+          className={styles.img}
+          src='https://fakeimg.pl/657x400'
+          alt='placeholder'
+          sizes='500px'
+          fill
+        />
+      </div>
       <Typography className={styles.text} size='lg'>
         {post.body}
       </Typography>

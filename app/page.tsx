@@ -1,8 +1,8 @@
-import { Card } from '@/components';
 import styles from './page.module.css';
 import { Post } from '@/interfaces/post.interface';
 import { API, urlSearchPostsParams } from '@/app/api';
 import { getUrlWithParams } from '@/helpers/getUrlWithParams';
+import { Card } from '@/components/card/card';
 
 async function getPosts(): Promise<Post[]> {
   const res = await fetch(

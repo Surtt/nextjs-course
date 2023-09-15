@@ -1,24 +1,35 @@
 'use client';
 
-import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { IForm } from '@/interfaces/form.interface';
 import { FormProps } from '@/components/form/form.props';
 import styles from './form.module.css';
 import { ButtonOrLink, Input, Textarea } from '@/components';
-import { API } from '@/app/api';
 import cn from 'classnames';
+import { API } from '@/app/api';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const schema = z.object({
+  name: z.string().min(1, { message: 'Fill your name' }),
+  comment: z.string().min(10, { message: 'Fill your comment' }),
+});
 
 export const Form = ({ postId, className, ...props }: FormProps) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    setError,
+    formState: { errors, isSubmitSuccessful },
     reset,
     clearErrors,
-  } = useForm<IForm>();
-  const [isSuccess, setIsSuccess] = useState<boolean>(false);
-  const [error, setError] = useState<string>();
+  } = useForm<IForm>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      name: '',
+      comment: '',
+    },
+  });
 
   const onSubmit = async (data: IForm) => {
     try {
@@ -34,15 +45,17 @@ export const Form = ({ postId, className, ...props }: FormProps) => {
       });
 
       if (res.ok) {
-        setIsSuccess(true);
+        const data = res.json();
         reset();
-        return res.json();
-      } else {
-        setError('Something went wrong');
+        return data;
       }
+      throw new Error('Something went wrong');
     } catch (e) {
       if (e instanceof Error) {
-        setError(e.message);
+        setError('customError', {
+          type: 'server side error',
+          message: e.message,
+        });
       }
     }
   };
@@ -54,17 +67,14 @@ export const Form = ({ postId, className, ...props }: FormProps) => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <Input
-        {...register('name', {
-          required: { value: true, message: 'Fill your name' },
-        })}
+        {...register('name')}
         placeholder='Name'
         error={errors.name}
         aria-invalid={errors.name ? true : false}
+        autoComplete='name'
       />
       <Textarea
-        {...register('comment', {
-          required: { value: true, message: 'Write your comment' },
-        })}
+        {...register('comment')}
         placeholder='Comment'
         error={errors.comment}
         aria-label='Comment'
@@ -73,25 +83,27 @@ export const Form = ({ postId, className, ...props }: FormProps) => {
       <ButtonOrLink variant='contained' onClick={() => clearErrors()}>
         Send
       </ButtonOrLink>
-      {isSuccess && (
+
+      {isSubmitSuccessful && (
         <div role='alert' className={cn(styles.panel, styles.success)}>
           <p className={styles.successTitle}>Your feedback has been sent</p>
           <p>Your review will be published after verification</p>
           <button
             aria-label='Close success notification'
-            onClick={() => setIsSuccess(false)}
+            onClick={() => reset()}
             className={styles.closeIcon}
           >
             &#9587;
           </button>
         </div>
       )}
-      {error && (
+
+      {errors.customError && (
         <div className={cn(styles.panel, styles.error)} role='alert'>
-          {error}
+          {errors.customError?.message}
           <button
             aria-label='Close error notification'
-            onClick={() => setError(undefined)}
+            onClick={() => clearErrors()}
             className={styles.closeIcon}
           >
             &#9587;
