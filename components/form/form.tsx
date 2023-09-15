@@ -1,13 +1,19 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import React from 'react';
 import { IForm } from '@/interfaces/form.interface';
 import { FormProps } from '@/components/form/form.props';
 import styles from './form.module.css';
 import { ButtonOrLink, Input, Textarea } from '@/components';
 import cn from 'classnames';
 import { API } from '@/app/api';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const schema = z.object({
+  name: z.string().min(1, { message: 'Fill your name' }),
+  comment: z.string().min(10, { message: 'Fill your comment' }),
+});
 
 export const Form = ({ postId, className, ...props }: FormProps) => {
   const {
@@ -18,6 +24,7 @@ export const Form = ({ postId, className, ...props }: FormProps) => {
     reset,
     clearErrors,
   } = useForm<IForm>({
+    resolver: zodResolver(schema),
     defaultValues: {
       name: '',
       comment: '',
@@ -38,19 +45,16 @@ export const Form = ({ postId, className, ...props }: FormProps) => {
       });
 
       if (res.ok) {
+        const data = res.json();
         reset();
-        return res.json();
-      } else {
-        setError('customError', {
-          type: 'server side error',
-          message: 'Something went wrong',
-        });
+        return data;
       }
+      throw new Error('Something went wrong');
     } catch (e) {
       if (e instanceof Error) {
         setError('customError', {
           type: 'server side error',
-          message: 'Something went wrong',
+          message: e.message,
         });
       }
     }
@@ -63,18 +67,14 @@ export const Form = ({ postId, className, ...props }: FormProps) => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <Input
-        {...register('name', {
-          required: { value: true, message: 'Fill your name' },
-        })}
+        {...register('name')}
         placeholder='Name'
         error={errors.name}
         aria-invalid={errors.name ? true : false}
         autoComplete='name'
       />
       <Textarea
-        {...register('comment', {
-          required: { value: true, message: 'Write your comment' },
-        })}
+        {...register('comment')}
         placeholder='Comment'
         error={errors.comment}
       />
