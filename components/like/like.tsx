@@ -49,6 +49,7 @@ const Like = ({
             [styles.border]: border,
             [styles.fill]: isLike,
           })}
+          aria-label='Add like'
         >
           {err && <h2>{err}</h2>}
           {amount && <Typography size='xs'>{amount}</Typography>}

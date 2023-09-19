@@ -23,8 +23,10 @@ async function getCommentsByPost(postId: string): Promise<CommentInterface[]> {
 }
 
 export default async function Post({ params }: PostProps) {
-  const post = await getPost(params.id);
-  const comments = await getCommentsByPost(params.id);
+  const [post, comments] = await Promise.all([
+    getPost(params.id),
+    getCommentsByPost(params.id),
+  ]);
 
   return (
     <article className={styles.article}>
